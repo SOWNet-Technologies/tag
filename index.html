@@ -1,3 +1,72 @@
-<html>
-<body>0</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Parameter Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sensor values</h1>
+        <p>T: <span id="tValue">no value</span></p>
+        <p>EC: <span id="ecValue">no value</span></p>
+        <p>MC: <span id="mcValue">no value</span></p>
+    </div>
+
+    <script>
+        // Function to get query parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                tValue: params.get('t'),
+                ecValue: params.get('ec'),
+                mcValue: params.get('mc'),
+            };
+        }
+
+        // Function to update the webpage with query parameters
+        function updatePage() {
+            const params = getQueryParams();
+
+            const tValueElement = document.getElementById('tValue');
+            if (params.tValue !== undefined) {
+                tValueElement.textContent = params.tValue;
+            } else {
+                tValueElement.textContent = 'no value';
+            }
+
+            const ecValueElement = document.getElementById('ecValue');
+            if (params.ecValue !== undefined) {
+                ecValueElement.textContent = params.ecValue;
+            } else {
+                ecValueElement.textContent = 'no value';
+            }
+
+            const mcValueElement = document.getElementById('mcValue');
+            if (params.mcValue !== undefined) {
+                mcValueElement.textContent = params.mcValue;
+            } else {
+                mcValueElement.textContent = 'no value';
+            }
+
+        }
+
+        // Update the page on load
+        window.onload = updatePage;
+    </script>
+</body>
 </html>
